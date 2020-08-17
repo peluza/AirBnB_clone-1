@@ -25,7 +25,7 @@ def do_deploy(archive_path):
         sudo("rm {:s}".format(tmp_path))
         all_path_w = releases_path + "/web_static/*"
         dictory_path = releases_path + "/web_static/"
-        sudo("mv {:s} {:s}".format(all_path_w, dictory_path))
+        sudo("mv {:s} {:s}".format(all_path_w, releases_path))
         sudo("rm -rf {:s}".format(dictory_path))
         sudo("rm -rf /data/web_static/current")
         sudo("ln -s {:s} /data/web_static/current".format(releases_path))
