@@ -16,7 +16,7 @@ def do_pack():
     local("mkdir -p versions")
     name_file = "versions/web_static_{:s}.tgz".format(
         datetime.now().strftime("%Y%m%d%H%M%S"))
-    local("tar -cvzf {:s} web_static".format(name_file))
+    local("tar -cvzf versions/{:s} web_static".format(name_file))
     if isfile(name_file):
         print("web_static packed: {:s} -> {}Bytes".format(
             name_file, getsize(name_file)))
