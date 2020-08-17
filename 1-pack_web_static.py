@@ -6,12 +6,10 @@
         path: the archive path if the archive has been correctly generated.
     """
 from fabric.api import local
-from fabric.decorators import runs_once
 from datetime import datetime
 from os.path import isfile, getsize
 
 
-@runs_once
 def do_pack():
     local("mkdir -p versions")
     name_file = "versions/web_static_{:s}.tgz".format(
