@@ -73,7 +73,7 @@ def do_clean(number=0):
         Args:
             number (int, optional): is the number of the archives
     """
-    if int(number) == 0 or int(number) == 1:
+    if int(number) <= 1:
         number = 1
     number = int(number) + 1
     with lcd("versions"):
