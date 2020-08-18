@@ -32,8 +32,7 @@ def deploy():
     Returns:
         funtion: distributes an archive to your web servers
     """
-    path = do_pack()
-    if path is not None:
+    if do_pack() is not None:
         return do_deploy(path)
     else:
         return False
