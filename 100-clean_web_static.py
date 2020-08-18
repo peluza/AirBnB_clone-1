@@ -65,3 +65,18 @@ def do_deploy(archive_path):
         return True
     else:
         return False
+
+
+def do_clean(number=0):
+    """deletes out-of-date archives, using the function do_clean
+
+        Args:
+            number (int, optional): is the number of the archives
+    """
+    if int(number) == 0 or int(number) == 1:
+        number = 1
+    number = int(number) + 1
+    with lcd("versions"):
+        local("ls -1t | tail -n +{:d} | xargs rm -rf".format(number))
+    with cd("/data/web_static/releases/"):
+        sudo("ls -1t -I test | tail -n +{:d} | xargs rm -rf".format(number))
