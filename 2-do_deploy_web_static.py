@@ -12,7 +12,7 @@ def do_deploy(archive_path):
 
         Returns:
         booleano: False if the file at the path archive_path doesn’t exist
-                Returns True if all operations have been done correctly, otherwise returns False
+                Returns True if all operations have been done correctly,
     """
 
     if isfile(archive_path):
