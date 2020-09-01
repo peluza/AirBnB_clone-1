@@ -18,5 +18,18 @@ def hbnb():
     return 'HBNB'
 
 
+@app.route("/c/<text>", strict_slashes=False)
+def varpage(text):
+    var = str(text).replace("_", " ")
+    return "C " + var
+
+
+@app.route("/python", strict_slashes=False, defaults={'text': "is cool"})
+@app.route("/python/<text>", strict_slashes=False)
+def varpagepy(text):
+    var = str(text).replace("_", " ")
+    return "Python " + var
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
