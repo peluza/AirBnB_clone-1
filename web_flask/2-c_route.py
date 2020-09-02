@@ -10,16 +10,34 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def index():
+    """index
+
+    Returns:
+        str: 'Hello HBNB!
+    """
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """hbnb
+
+    Returns:
+        str: HBNB
+    """
     return 'HBNB'
 
 
 @app.route("/c/<text>", strict_slashes=False)
 def varpage(text):
+    """vatpage
+
+    Args:
+        text (str): name for the page
+
+    Returns:
+        str: name for the page
+    """
     var = str(text).replace("_", " ")
     return "C " + var
 
