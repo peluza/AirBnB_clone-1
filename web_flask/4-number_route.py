@@ -66,7 +66,7 @@ def varpagenum(n):
     Returns:
         str : n is a number
     """
-    return "{} is a number".format(n)
+    return "{:d} is a number".format(n)
 
 
 if __name__ == "__main__":
