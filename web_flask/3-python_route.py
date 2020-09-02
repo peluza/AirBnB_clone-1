@@ -20,7 +20,7 @@ def index():
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-     """hbnb
+    """hbnb
 
     Returns:
         str: HBNB
