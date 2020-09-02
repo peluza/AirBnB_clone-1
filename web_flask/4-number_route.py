@@ -56,6 +56,7 @@ def varpagepy(text):
     var = str(text).replace("_", " ")
     return "Python " + var
 
+
 @app.route("/number/<int:n>", strict_slashes=False)
 def varpagenum(n):
     """varpagenum
