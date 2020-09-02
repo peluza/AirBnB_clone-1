@@ -10,16 +10,34 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def index():
+     """index
+
+    Returns:
+        str: 'Hello HBNB!
+    """
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """hbnb
+
+    Returns:
+        str: HBNB
+    """
     return 'HBNB'
 
 
 @app.route("/c/<text>", strict_slashes=False)
 def varpage(text):
+    """vatpage
+
+    Args:
+        text (str): name for the page
+
+    Returns:
+        str: name for the page
+    """
     var = str(text).replace("_", " ")
     return "C " + var
 
@@ -27,12 +45,28 @@ def varpage(text):
 @app.route("/python", strict_slashes=False, defaults={'text': "is cool"})
 @app.route("/python/<text>", strict_slashes=False)
 def varpagepy(text):
+    """varpagepy
+
+    Args:
+        text (str): name for the page
+
+    Returns:
+        str: name for the page
+    """
     var = str(text).replace("_", " ")
     return "Python " + var@app.route("/number/<int:n>", strict_slashes=False)
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def varpagenum(n):
+    """varpagenum
+
+    Args:
+        n (int): this is number
+
+    Returns:
+        int : n is a number
+    """
     return "{} is a number".format(n)
 
 
