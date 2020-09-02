@@ -4,24 +4,40 @@
     """
 
 from flask import Flask
-from flask import render_template
-
 
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
 def index():
+    """index
+
+    Returns:
+        str: 'Hello HBNB!
+    """
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """hbnb
+
+    Returns:
+        str: HBNB
+    """
     return 'HBNB'
 
 
 @app.route("/c/<text>", strict_slashes=False)
 def varpage(text):
+    """vatpage
+
+    Args:
+        text (str): name for the page
+
+    Returns:
+        str: name for the page
+    """
     var = str(text).replace("_", " ")
     return "C " + var
 
@@ -29,17 +45,41 @@ def varpage(text):
 @app.route("/python", strict_slashes=False, defaults={'text': "is cool"})
 @app.route("/python/<text>", strict_slashes=False)
 def varpagepy(text):
+    """varpagepy
+
+    Args:
+        text (str): name for the page
+
+    Returns:
+        str: name for the page
+    """
     var = str(text).replace("_", " ")
-    return "Python " + var@app.route("/number/<int:n>", strict_slashes=False)
+    return "Python " + var
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def varpagenum(n):
-    return "{} is a number".format(n)
+    """varpagenum
+
+    Args:
+        n (int): this is number
+
+    Returns:
+        str : n is a number
+    """
+    return "{:d} is a number".format(n)
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
 def numpage(n):
+    """numpage
+
+    Args:
+        n (int): this is number
+
+    Returns:
+        html: print the number
+    """
     return render_template("5-number.html", number=n)
 
 
