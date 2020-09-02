@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def index():
-     """index
+    """index
 
     Returns:
         str: 'Hello HBNB!
@@ -54,8 +54,7 @@ def varpagepy(text):
         str: name for the page
     """
     var = str(text).replace("_", " ")
-    return "Python " + var@app.route("/number/<int:n>", strict_slashes=False)
-
+    return "Python " + var
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def varpagenum(n):
