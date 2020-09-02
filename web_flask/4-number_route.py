@@ -65,7 +65,7 @@ def varpagenum(n):
         n (int): this is number
 
     Returns:
-        int : n is a number
+        str : n is a number
     """
     return "{} is a number".format(n)
 
