@@ -15,6 +15,8 @@ from models.amenity import Amenity
 
 
 class DBStorage:
+    """DBStorage
+    """
 
     __engine = None
     __session = None
@@ -30,38 +32,58 @@ class DBStorage:
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
-        class_list = [User, State, City, Amenity, Place, Review]
-        all_dict = {}
+        """all
+
+        Args:
+            cls (str, optional): name of the class. Defaults to None.
+
+        Returns:
+            dict: new dictionary of the information the query
+        """
+        query_obj = []
         if cls is not None:
-            if type(cls) == str:
-                class_obj = eval(cls)
-            else:
-                class_obj = cls
-                cls = str(cls)
-            for item in self.__session.query(class_obj):
-                all_dict[cls + "." + item.id] = item
+            query_obj = self.__session.query(cls).all()
         else:
-            for table in class_list:
-                for item in self.__session.query(table):
-                    all_dict[table.__class__.__name__ + "." + item.id] = item
-        return all_dict
+            list_class = [User, Place, State, City, Review, Amenity]
+            for x in list_class:
+                query_obj += self.__session.query(x).all()
+        new_dict = {}
+        for v in query_obj:
+            id_class = type(v).__name__ + "." + v.id
+            new_dict[id_class] = v
+        return new_dict
 
     def new(self, obj):
+        """new
+
+        Args:
+            obj (str):object at create
+        """
         self.__session.add(obj)
 
     def save(self):
+        """save
+        """
         self.__session.commit()
 
     def delete(self, obj=None):
+        """delete
+
+        Args:
+            obj (str, optional): object at delete. Defaults to None.
+        """
         if obj is not None:
             self.__session.delete(obj)
             self.__session.commit()
 
     def reload(self):
+        """reload
+        """
         Base.metadata.create_all(self.__engine)
         factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         self.__session = scoped_session(factory)
 
     def close(self):
-        """call remove method"""
+        """close
+        """
         self.__session.remove()

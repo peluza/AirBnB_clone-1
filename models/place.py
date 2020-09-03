@@ -42,8 +42,10 @@ class Place(BaseModel, Base):
     else:
         @property
         def reviews(self):
-            """
-                returns a list of Review instances
+            """reviews
+
+            Returns:
+                list: list of the instance
             """
             obj_l = []
             ints = models.storage.all()
@@ -54,8 +56,10 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            """
-                return a list of Amenities instances
+            """amenities
+
+            Returns:
+                list: list of the instance
             """
             obj_l = []
             ints = models.storage.all()
@@ -67,8 +71,10 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, value):
-            """
-                add and amenity_id based on a given Amenity.id
+            """amenities
+
+            Args:
+                value (uuid): id 
             """
             if value.__class__.__name__ == "Amenity":
                 self.amenity_ids.append(value.id)

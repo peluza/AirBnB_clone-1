@@ -29,8 +29,8 @@ class State(BaseModel, Base):
                 list: list of the information cities
             """
             obj = []
-            ints = models.storage.all()
-            for k, v in ints.items():
-                if k.split(".")[0] == "City" and v.state_id == self.id:
+            ints = models.storage.all(City)
+            for v in ints.values():
+                if v.state_id == self.id:
                     obj.append(v)
             return obj

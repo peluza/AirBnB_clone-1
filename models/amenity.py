@@ -7,6 +7,12 @@ from models.place import Place
 
 
 class Amenity(BaseModel, Base):
+    """Amenity
+
+    Args:
+        BaseModel (cls): BaseModel
+        Base (cls]): Base
+    """
     __tablename__ = "amenities"
     name = Column(String(128), nullable=False)
     place_amenities = relationship(
