@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>AirBnB clone</title>
         <link rel="shortcut icon" type="image/x-icon" href="images/icon.png">
-        <link rel="stylesheet" type="text/css" href="styles/4-common.css">
-        <link rel="stylesheet" type="text/css" href="styles/3-header.css">
-        <link rel="stylesheet" type="text/css" href="styles/3-footer.css">
-        <link rel="stylesheet" type="text/css" href="styles/6-filters.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/4-common.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/3-header.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/3-footer.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/6-filters.css">
 </head>
 
 <body>
@@ -20,15 +20,18 @@
                 <section class="filters">
                         <div class="locations">
                                 <h3>States</h3>
-                                <h4>California, Arizona...</h4>
+                                <h4>&nbsp</h4>
                                 <ul class="popover">
+                                        {% for x in states|sort(attribute="name") %}
                                         <li>
-                                                <h2>Arizona:</h2>
+                                                <h2>{{ x.name}}:</h2>
                                                 <ul>
-                                                        <li>Page1</li>
-                                                        <li>Page2</li>
+                                                        {% for y in x.cities|sort(attribute='name') %}
+                                                        <li>{{ y.name }}</li>
+                                                        {% endfor %}
                                                 </ul>
                                         </li>
+                                        {% endfor %}
                                         <li>
                                                 <h2>California:</h2>
                                                 <ul>
@@ -40,14 +43,12 @@
                         </div>
                         <div class="amenities">
                                 <h3>Amenities</h3>
-                                <h4>Internet, Kitchen...</h4>
+                                <h4>&nbsp</h4>
                                 <ul class="popover">
-                                        <li>Internet</li>
-                                        <li>TV</li>
-                                        <li>Kitchen</li>
-                                        <li>Iron</li>
+                                        {% for v in ameny|sort(attribute='name') %}
+                                        <li>{{ v.name }}</li>
+                                        {% endfor %}
                                 </ul>
-
                         </div>
                         <button class="butt">Search</button>
                 </section>
