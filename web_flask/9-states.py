@@ -15,6 +15,7 @@ def web_page_states():
     st = storage.all(State).values()
     return render_template("7-states_list.html", states=st)
 
+
 @app.route("/states/<id>", strict_slashes=False)
 def web_page_id(id):
     st = storage.all(State).values()
@@ -26,9 +27,8 @@ def web_page_id(id):
             flag = True
             break
         else:
-            flag = False     
+            flag = False
     return render_template("9-states.html", states=value, flag=flag)
-
 
 
 @app.teardown_appcontext
