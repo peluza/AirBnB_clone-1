@@ -5,10 +5,11 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship, backref
 from models.city import City
 from models.user import User
-from  os import getenv
+from os import getenv
 import models
 
 metadata = Base.metadata
+
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -74,7 +75,7 @@ class Place(BaseModel, Base):
             """amenities
 
             Args:
-                value (uuid): id 
+                value (uuid): id
             """
             if value.__class__.__name__ == "Amenity":
                 self.amenity_ids.append(value.id)
