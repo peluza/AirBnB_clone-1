@@ -10,6 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from os import getenv
 
 
 class HBNBCommand(cmd.Cmd):
@@ -118,24 +119,25 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        my_list = args.split(" ")
-        class_name = eval("{}()".format(my_list[0]))
-        for i in range(1, len(my_list)):
-            my_key = my_list[i].split("=")
-            if "_" in my_key[1]:
-                my_key[1] = my_key[1].replace("_", " ")
-            if '"' in my_key[1]:
-                my_key[1] = my_key[1].replace('"', "")
-            else:
-                my_key[1] = eval(my_key[1])
-            setattr(class_name, my_key[0], my_key[1])
-        if my_list[0] not in HBNBCommand.classes:
+
+        args = args.split(" ")
+        if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[my_list[0]]()
-        storage.save()
+
+        new_instance = HBNBCommand.classes[args[0]]()
+        for arg in args[1:]:
+            data = arg.split("=")
+            key = data[0]
+            value = data[1].replace("_", " ")
+
+            if hasattr(new_instance, key):
+                try:
+                    setattr(new_instance, key, eval(value))
+                except Exception:
+                    pass
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -211,17 +213,19 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
-
+        my_dict = storage.all()
+        if '_sa_instance_state' in my_dict:
+            del my_dict["_sa_instance_state"]
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in my_dict.items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in my_dict.items():
                 print_list.append(str(v))
 
         print(print_list)
